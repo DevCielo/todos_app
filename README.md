@@ -19,8 +19,8 @@ To get started with this project, follow the instructions below:
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/your-username/basic-todos-app.git
-    cd basic-todos-app
+    git clone https://github.com/DevCielo/todos_app.git
+    cd todos-app
     ```
 
 2. **Install dependencies:**
