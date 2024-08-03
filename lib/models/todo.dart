@@ -8,4 +8,16 @@ class Todo {
     required this.content,
     required this.completed,
   });
+
+  Map<String, dynamic> toJson() => {
+    'todoId': todoId,
+    'content': content,
+    'completed': completed,
+  };
+
+  static Todo fromJson(Map<String, dynamic> json) => Todo(
+    todoId: json['todoId'],
+    content: json['content'],
+    completed: json['completed'],
+  );
 }

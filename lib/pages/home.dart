@@ -5,9 +5,12 @@ import 'package:todos_app/pages/add.dart';
 import 'package:todos_app/pages/completed.dart';
 import 'package:todos_app/providers/todo_provider.dart';
 import 'package:todos_app/models/todo.dart';
+import 'package:todos_app/storage/storage.dart';
 
 class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key});
+  MyHomePage({Key? key, required this.storage}) : super(key: key);
+
+  final UserInputStorage storage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
