@@ -17,12 +17,17 @@ class MyHomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Todo App"),
+        title: const Text("Todo App"),
       ),
       body: ListView.builder(
         itemCount: activeTodos.length + 1,
         itemBuilder: (context, index) {
-          if (index == activeTodos.length) {
+          if (activeTodos.isEmpty) {
+            return const Padding(
+              padding: EdgeInsets.only(top: 300.0),
+              child: Center(child: Text('Add a todo using the button below'),));
+          }
+          else if (index == activeTodos.length) {
             if (completedTodos.isEmpty) return Container();
             else {
               return Center(child: TextButton(child: Text("Completed Todos"), onPressed: () {
@@ -34,28 +39,36 @@ class MyHomePage extends ConsumerWidget {
         return Slidable(
           startActionPane: ActionPane(motion: ScrollMotion(), children: [
             SlidableAction(onPressed: (context) {
-              ref.watch(todoProvider.notifier).deleteTodo(index);
+              ref.watch(todoProvider.notifier).deleteTodo(activeTodos[index].todoId);
             },
             backgroundColor: Colors.red, 
-            borderRadius: BorderRadius.all(Radius.circular(20)), 
+            borderRadius: const BorderRadius.all(Radius.circular(20)), 
             icon: Icons.delete,)
           ]),
           endActionPane: ActionPane(motion: ScrollMotion(), children: [
             SlidableAction(onPressed: (context) {
-              ref.watch(todoProvider.notifier).completeTodo(index);
+              ref.watch(todoProvider.notifier).completeTodo(activeTodos[index].todoId);
             },
             backgroundColor: Colors.green, 
-            borderRadius: BorderRadius.all(Radius.circular(20)), 
+            borderRadius: const BorderRadius.all(Radius.circular(20)), 
             icon: Icons.check,)
           ]),
-          child: ListTile(title: Text(activeTodos[index].content))
+          child: Container(
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.grey[300], borderRadius: const BorderRadius.all(Radius.circular(20))
+            ),
+            child: ListTile(
+              title: Text(activeTodos[index].content))
+            )
         );
           }
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => AddTodo()));
+            .push(MaterialPageRoute(builder: (context) => const AddTodo()));
         },
         tooltip: 'Add todo',
         child: const Icon(Icons.add),
